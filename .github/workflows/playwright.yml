@@ -37,3 +37,10 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
+        
+    - name: Deploy
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: playwright-report
+        clean: true
+        token: ${{ secrets.TOKEN }}
