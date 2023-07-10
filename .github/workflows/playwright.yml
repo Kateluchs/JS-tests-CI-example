@@ -38,9 +38,15 @@ jobs:
         path: playwright-report/
         retention-days: 30
         
-    - name: Deploy
-      uses: JamesIves/github-pages-deploy-action@v4
+    - name: Setup Pages
+      if: always()
+      uses: actions/configure-pages@v2
+    - name: Upload artifact
+      if: always()
+      uses: actions/upload-pages-artifact@v1
       with:
-        folder: playwright-report
-        clean: true
-        token: ${{ secrets.TOKEN }}
+        path: 'reports'
+    - name: Deploy to GitHub Pages
+      if: always()
+      id: deployment
+      uses: actions/deploy-pages@v1
