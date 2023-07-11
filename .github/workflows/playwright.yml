@@ -14,12 +14,9 @@ permissions:
   deployments: write
 
 jobs:
-  test:
+  build:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
@@ -37,6 +34,13 @@ jobs:
         name: playwright-report
         path: reports/playwright/
         retention-days: 30
+
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     - name: Setup Pages
       if: always()
       uses: actions/configure-pages@v2
