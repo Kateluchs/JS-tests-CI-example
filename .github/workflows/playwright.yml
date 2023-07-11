@@ -49,6 +49,10 @@ jobs:
       - name: Setup Pages
         if: always()
         uses: actions/configure-pages@v2
+      - name: show dir
+        run: ls
+      - name: show path
+        run: pwd
       - name: Upload artifact
         if: always()
         uses: actions/upload-pages-artifact@v1
